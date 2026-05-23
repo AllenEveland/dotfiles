@@ -6,6 +6,8 @@ local logoutmenu        = "~/.allenconf/scripts/logout_menu.sh"
 local waybar            = "~/.allenconf/scripts/waybar.sh"
 local wallpaper_random  = "~/.allenconf/scripts/wallpaper_random.sh"
 local taskmanager       = "~/.allenconf/scripts/task_manager.sh"
+local workspacenext     = "~/.allenconf/scripts/workspace_action.sh next"
+local workspaceprev     = "~/.allenconf/scripts/workspace_action.sh prev"
 
 local mainMod   = "SUPER"
 local ctrlMod   = "CTRL"
@@ -26,6 +28,8 @@ hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(wallpaper_random))
 hl.bind("F11", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(ctrlMod .. " + SHIFT + Escape", hl.dsp.exec_cmd(taskmanager))
+hl.bind(mainMod .. " + ALT + right", hl.dsp.exec_cmd(workspacenext))
+hl.bind(mainMod .. " + ALT + left", hl.dsp.exec_cmd(workspaceprev))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))

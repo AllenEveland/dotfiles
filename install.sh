@@ -35,6 +35,8 @@ PACKAGES=(
     slurp
     brightnessctl
     libvips
+    openslide
+    imagemagick
 )
 
 # ─────────────────────────────────────────
@@ -114,6 +116,9 @@ FILES=(
     command_runner.sh
     logout_menu.sh
     waybar.sh
+    wallpaper_random.sh
+    wallpaper_effect.sh
+    task_manager.sh
 )
 change_mode() {
     if [ -d "$HOME/.allenconf/scripts" ]; then

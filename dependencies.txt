@@ -17,3 +17,5 @@ grim
 slurp
 brightnessctl
 libvips
+openslide
+imagemagick

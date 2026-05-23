@@ -4,6 +4,8 @@ local app_launcher      = "~/.allenconf/scripts/applications_launcher.sh"
 local commandrunner     = "~/.allenconf/scripts/command_runner.sh"
 local logoutmenu        = "~/.allenconf/scripts/logout_menu.sh"
 local waybar            = "~/.allenconf/scripts/waybar.sh"
+local wallpaper_random  = "~/.allenconf/scripts/wallpaper_random.sh"
+local taskmanager       = "~/.allenconf/scripts/task_manager.sh"
 
 local mainMod   = "SUPER"
 local ctrlMod   = "CTRL"
@@ -20,7 +22,10 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(commandrunner))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(waybar))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(wallpaper_random))
 hl.bind("F11", hl.dsp.window.fullscreen())
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(ctrlMod .. " + SHIFT + Escape", hl.dsp.exec_cmd(taskmanager))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))

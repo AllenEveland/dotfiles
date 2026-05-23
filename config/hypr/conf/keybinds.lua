@@ -8,6 +8,8 @@ local wallpaper_random  = "~/.allenconf/scripts/wallpaper_random.sh"
 local taskmanager       = "~/.allenconf/scripts/task_manager.sh"
 local workspacenext     = "~/.allenconf/scripts/workspace_action.sh next"
 local workspaceprev     = "~/.allenconf/scripts/workspace_action.sh prev"
+local scrshot_normal    = "~/.allenconf/scripts/screenshots.sh normal"
+local scrshot_cliboard  = "~/.allenconf/scripts/screenshots.sh clipboard"
 
 local mainMod   = "SUPER"
 local ctrlMod   = "CTRL"
@@ -30,6 +32,8 @@ hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(ctrlMod .. " + SHIFT + Escape", hl.dsp.exec_cmd(taskmanager))
 hl.bind(mainMod .. " + ALT + right", hl.dsp.exec_cmd(workspacenext))
 hl.bind(mainMod .. " + ALT + left", hl.dsp.exec_cmd(workspaceprev))
+hl.bind("Print", hl.dsp.exec_cmd(scrshot_normal))
+hl.bind(shiftMod .. " + Print", hl.dsp.exec_cmd(scrshot_cliboard))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -62,6 +66,6 @@ hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
 hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
 hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 1%+"),                  { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 1%-"),                  { locked = true, repeating = true })
 

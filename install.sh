@@ -119,6 +119,8 @@ FILES=(
     wallpaper_random.sh
     wallpaper_effect.sh
     task_manager.sh
+    screenshots.sh
+    workspace_action.sh
 )
 change_mode() {
     if [ -d "$HOME/.allenconf/scripts" ]; then

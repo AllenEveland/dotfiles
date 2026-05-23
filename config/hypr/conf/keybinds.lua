@@ -2,6 +2,8 @@ local terminal          = "alacritty"
 local fileManager       = "nautilus"
 local app_launcher      = "~/.allenconf/scripts/applications_launcher.sh"
 local commandrunner     = "~/.allenconf/scripts/command_runner.sh"
+local logoutmenu        = "~/.allenconf/scripts/logout_menu.sh"
+local waybar            = "~/.allenconf/scripts/waybar.sh"
 
 local mainMod   = "SUPER"
 local ctrlMod   = "CTRL"
@@ -10,13 +12,14 @@ local altMod    = "ALT"
 
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
--- hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd(app_launcher))
+hl.bind(ctrlMod .. " + SUPER + M", hl.dsp.exec_cmd(logoutmenu))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(commandrunner))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(waybar))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))

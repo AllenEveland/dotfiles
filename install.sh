@@ -95,13 +95,31 @@ copy_configs() {
 
     # ── Copy ./allenconf/* → ~/<username>conf/ ──
     if [ -d "./allenconf" ]; then
-        DEST_DIR="~/.allenconf"
+        DEST_DIR="$HOME/.allenconf"
         echo -e "${YELLOW}→ Copying ./allenconf/* to ${DEST_DIR}/${RESET}"
         mkdir -p "$DEST_DIR"
         cp -r ./allenconf/* "$DEST_DIR/"
         echo -e "${GREEN}  ✔ Done – destination: ${BOLD}${DEST_DIR}${RESET}"
     else
         echo -e "${RED}  ✘ Directory ./allenconf not found – skipping.${RESET}"
+    fi
+}
+
+# ─────────────────────────────────────────
+#  Function: Change script mode
+# ─────────────────────────────────────────
+FILES=(
+    applications_launcher.sh
+    command_runner.sh
+    logout_menu.sh
+    waybar.sh
+)
+change_mode() {
+    if [ -d "$HOME/.allenconf/scripts" ]; then
+        for files in "${FILES[@]}"; do
+            chmod +x "$HOME/.allenconf/scripts/$files"
+        done
+        echo -e "${GREEN} ✔ Change mode successfully ${RESET}"
     fi
 }
 
@@ -117,6 +135,7 @@ echo -e "${RESET}"
 install_packages
 confirm_backup
 copy_configs
+change_mode
 
 echo -e "\n${GREEN}${BOLD}✔ Setup complete!${RESET}\n"
 

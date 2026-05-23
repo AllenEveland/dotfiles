@@ -16,4 +16,4 @@ nautilus
 grim
 slurp
 brightnessctl
-
+libvips

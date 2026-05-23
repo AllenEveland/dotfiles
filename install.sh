@@ -34,6 +34,7 @@ PACKAGES=(
     grim
     slurp
     brightnessctl
+    libvips
 )
 
 # ─────────────────────────────────────────

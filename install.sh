@@ -33,6 +33,7 @@ PACKAGES=(
     nautilus
     grim
     slurp
+    brightnessctl
 )
 
 # ─────────────────────────────────────────
@@ -94,9 +95,7 @@ copy_configs() {
 
     # ── Copy ./allenconf/* → ~/<username>conf/ ──
     if [ -d "./allenconf" ]; then
-        USERNAME=$(whoami)
-        DEST_DIR="$HOME/${USERNAME}conf"
-
+        DEST_DIR="~/.allenconf"
         echo -e "${YELLOW}→ Copying ./allenconf/* to ${DEST_DIR}/${RESET}"
         mkdir -p "$DEST_DIR"
         cp -r ./allenconf/* "$DEST_DIR/"
@@ -120,3 +119,4 @@ confirm_backup
 copy_configs
 
 echo -e "\n${GREEN}${BOLD}✔ Setup complete!${RESET}\n"
+

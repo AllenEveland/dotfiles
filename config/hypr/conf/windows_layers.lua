@@ -31,3 +31,10 @@ hl.window_rule({
     float = true,
 })
 
+hl.layer_rule({
+    match = {
+        namespace = "waybar"
+    },
+    blur = true
+})
+

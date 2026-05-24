@@ -17,6 +17,7 @@ local shiftMod  = "SHIFT"
 local altMod    = "ALT"
 
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(altMod .. " + F4", hl.dsp.window.close())
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd(app_launcher))
 hl.bind(ctrlMod .. " + SUPER + M", hl.dsp.exec_cmd(logoutmenu))

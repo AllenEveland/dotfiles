@@ -1,0 +1,206 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", "FiraCode Nerd Font", sans-serif;
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+}
+
+/* ═══════════════════════════
+   CONTROL CENTER
+═══════════════════════════ */
+
+.control-center {
+    background-color: rgba(30, 30, 30, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 8px;
+    color: rgba(220, 220, 220, 0.88);
+    max-height: 500px;
+}
+
+.control-center-list {
+    background: transparent;
+    min-height: 0;
+}
+
+/* ═══════════════════════════
+   WIDGET TITLE
+═══════════════════════════ */
+
+.widget-title {
+    margin: 4px 4px 8px 4px;
+    color: rgba(220, 220, 220, 0.9);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.widget-title > button {
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 5px;
+    color: rgba(180, 180, 180, 0.7);
+    padding: 2px 10px;
+    font-size: 12px;
+}
+
+.widget-title > button:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+    color: rgba(210, 210, 210, 0.9);
+}
+
+/* ═══════════════════════════
+   WIDGET DND
+═══════════════════════════ */
+
+.widget-dnd {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 7px;
+    margin: 0 4px 8px 4px;
+    padding: 6px 10px;
+    color: rgba(200, 200, 200, 0.75);
+    font-size: 13px;
+}
+
+.widget-dnd > switch {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+}
+
+.widget-dnd > switch:checked {
+    background-color: rgba(185, 105, 155, 0.55);
+    border: 1px solid rgba(185, 105, 155, 0.40);
+}
+
+.widget-dnd > switch slider {
+    background-color: rgba(230, 230, 230, 0.88);
+    border-radius: 12px;
+    min-width: 18px;
+    min-height: 18px;
+}
+
+/* ═══════════════════════════
+   WIDGET MPRIS
+═══════════════════════════ */
+
+.widget-mpris {
+    margin: 0 4px 8px 4px;
+}
+
+.widget-mpris-player {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 7px;
+    padding: 8px 10px;
+    margin: 0 0 4px 0;
+}
+
+.widget-mpris-title {
+    color: rgba(220, 220, 220, 0.92);
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.widget-mpris-subtitle {
+    color: rgba(170, 170, 170, 0.65);
+    font-size: 12px;
+}
+
+.widget-mpris-player > box > button {
+    background: transparent;
+    border: none;
+    color: rgba(200, 200, 200, 0.75);
+    border-radius: 5px;
+    padding: 2px 6px;
+}
+
+.widget-mpris-player > box > button:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: rgba(230, 230, 230, 0.95);
+}
+
+/* ═══════════════════════════
+   NOTIFICATIONS
+═══════════════════════════ */
+
+.notification-row {
+    margin: 2px 4px;
+}
+
+.notification {
+    background-color: rgba(40, 40, 40, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: rgba(215, 215, 215, 0.88);
+}
+
+.notification-content {
+    padding: 0;
+}
+
+.notification-default-action {
+    background: transparent;
+    border-radius: 8px;
+    padding: 0;
+}
+
+.notification-default-action:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.notification-action {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 5px;
+    color: rgba(190, 190, 190, 0.80);
+    margin: 4px 2px 0 2px;
+    padding: 2px 8px;
+    font-size: 12px;
+}
+
+.notification-action:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+    color: rgba(220, 220, 220, 0.95);
+}
+
+.notification-label-summary {
+    font-weight: bold;
+    font-size: 13px;
+    color: rgba(225, 225, 225, 0.92);
+}
+
+.notification-label-body {
+    font-size: 12px;
+    color: rgba(175, 175, 175, 0.75);
+}
+
+.close-button {
+    background: transparent;
+    border: none;
+    border-radius: 5px;
+    color: rgba(170, 170, 170, 0.55);
+    padding: 2px 5px;
+    font-size: 12px;
+}
+
+.close-button:hover {
+    background-color: rgba(200, 70, 70, 0.25);
+    color: rgba(220, 130, 130, 0.9);
+}
+
+/* ═══════════════════════════
+   POPUP NOTIFICATION
+═══════════════════════════ */
+
+.floating-notifications {
+    background: transparent;
+}
+
+.floating-notifications .notification {
+    background-color: rgba(30, 30, 30, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    box-shadow: none;
+}

@@ -1,0 +1,49 @@
+{
+    "positionX": "right",
+    "positionY": "top",
+
+    "notification-icon-size": 64,
+    "notification-close-button-text": "",
+    "notification-inline-replies": false,
+    "notification-body-image-height": 100,
+    "notification-body-image-width": 200,
+
+    "timeout": 5,
+    "timeout-low": 3,
+    "timeout-critical": 0,
+
+    "control-center-positionX": "right",
+    "control-center-positionY": "top",
+    "control-center-margin-top": 8,
+    "control-center-margin-bottom": 0,
+    "control-center-margin-right": 8,
+    "control-center-margin-left": 0,
+    "control-center-width": 400,
+
+    "layer": "overlay",
+    "control-center-layer": "overlay",
+
+    "widgets": [
+        "title",
+        "dnd",
+        "mpris",
+        "notifications"
+    ],
+
+    "widget-config": {
+        "title": {
+            "text": "Notifications",
+            "clear-all-button": true,
+            "button-text": "Clear all"
+        },
+
+        "dnd": {
+            "text": "Do not disturb"
+        },
+
+        "mpris": {
+            "image-size": 56,
+            "image-radius": 6
+        }
+    }
+}

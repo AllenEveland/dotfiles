@@ -1,7 +1,7 @@
 {
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "pulseaudio", "network", "power-profiles-daemon", "custom/system", "custom/notification", "battery"],
+    "modules-right": ["tray", "pulseaudio", "network", "power-profiles-daemon", "custom/notification", "battery"],
 
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -68,36 +68,6 @@
         "on-click": "swaync-client -t -sw",
     },
 
-    "custom/system": {
-        "format": "",
-        "tooltip": false,
-        "on-scroll-up": "true",
-        "on-scroll-down": "true"
-    },
-    // CPU
-    "cpu": {
-        "format": "/ C {usage}% ",
-        "on-click": "~/.config/ml4w/settings/system-monitor.sh",
-        "on-scroll-up": "true",
-        "on-scroll-down": "true"
-    },
-    // Memory
-    "memory": {
-        "format": "/ M {}% ",
-        "on-click": "~/.config/ml4w/settings/system-monitor.sh",
-        "on-scroll-up": "true",
-        "on-scroll-down": "true"
-    },
-    // Harddisc space used
-    "disk": {
-        "interval": 30,
-        "format": "D {percentage_used}% ",
-        "path": "/",
-        "on-click": "~/.config/ml4w/settings/system-monitor.sh",
-        "on-scroll-up": "true",
-        "on-scroll-down": "true"
-    },
-
     "power-profiles-daemon": {
         "format": "{icon}",
         "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
@@ -116,14 +86,14 @@
         "tooltip-format": "Left: Notifications\nRight: Do not disturb",
         "format": "{icon}",
         "format-icons": {
-            "notification": "notifications_active",
-            "none": "notifications",
-            "dnd-notification": "notifications_active",
-            "dnd-none": "notifications_paused",
-            "inhibited-notification": "notification_important",
-            "inhibited-none": "notification_important",
-            "dnd-inhibited-notification": "notification_off",
-            "dnd-inhibited-none": "notifications_off"
+            "notification":               "<span color='#ffffff'>󰂚</span>",
+            "none":                       "<span color='#ffffff'>󰂜</span>",
+            "dnd-notification":           "<span color='#ffffff'>󰂞</span>",
+            "dnd-none":                   "<span color='#ffffff'>󰂛</span>",
+            "inhibited-notification":     "<span color='#ffffff'>󰵙</span>",
+            "inhibited-none":             "<span color='#ffffff'>󰂟</span>",
+            "dnd-inhibited-notification": "<span color='#ffffff'>󱏧</span>",
+            "dnd-inhibited-none":         "<span color='#ffffff'>󰂠</span>"
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
@@ -131,6 +101,5 @@
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw",
         "escape": true
-    }
+    },
 }
-

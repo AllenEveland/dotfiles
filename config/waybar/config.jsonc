@@ -1,0 +1,136 @@
+{
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "pulseaudio", "network", "power-profiles-daemon", "custom/system", "custom/notification", "battery"],
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        "format": "{name}",
+        "cursor": true,
+    },
+
+    "tray": {
+        "icon-size": 20,
+        "spacing": 10,
+        "cursor": true,
+    },
+
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": "  Ethernet",
+        "format-linked": "  Linked (No IP)",
+        "format-disconnected": "  Disconnected",
+        "tooltip": false,
+    },
+
+    "battery": {
+        "states": {
+            "good": 80,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-full": "{icon} {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-alt": "{icon} {capacity}%",
+        "format-icons": [" ", " ", " ", " ", " "],
+        "tooltip-format": "{time}",
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "  {volume}%",
+        "format-bluetooth": " {volume}%",
+        "format-bluetooth-muted": "  {volume}%",
+        "format-icons": {
+            "headphone": " ",
+            "headset": " ",
+            "default": [" "],
+        },
+        "on-click": "pavucontrol",
+    },
+
+    "clock": {
+        "format": "{:%a %d/%m/%Y ~ %H:%M}",
+        "tooltip-format": "<span size='15000'><tt>{calendar}</tt></span>",
+        "calendar": {
+            "mode": "month",
+            "format": {
+                "months": "<span color='#F5C2E7'><b>{}</b></span>",
+                "weekdays": "<span color='#89B4FA'><b>{}</b></span>",
+                "days": "<span color='#CDD6F4'><b>{}</b></span>",
+                "today": "<span color='#F9E2AF'><b>{}</b></span>",
+            }
+        },
+        "on-click": "swaync-client -t -sw",
+    },
+
+    "custom/system": {
+        "format": "",
+        "tooltip": false,
+        "on-scroll-up": "true",
+        "on-scroll-down": "true"
+    },
+    // CPU
+    "cpu": {
+        "format": "/ C {usage}% ",
+        "on-click": "~/.config/ml4w/settings/system-monitor.sh",
+        "on-scroll-up": "true",
+        "on-scroll-down": "true"
+    },
+    // Memory
+    "memory": {
+        "format": "/ M {}% ",
+        "on-click": "~/.config/ml4w/settings/system-monitor.sh",
+        "on-scroll-up": "true",
+        "on-scroll-down": "true"
+    },
+    // Harddisc space used
+    "disk": {
+        "interval": 30,
+        "format": "D {percentage_used}% ",
+        "path": "/",
+        "on-click": "~/.config/ml4w/settings/system-monitor.sh",
+        "on-scroll-up": "true",
+        "on-scroll-down": "true"
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        },
+        "on-scroll-up": "true",
+        "on-scroll-down": "true"
+    },
+
+    "custom/notification": {
+        "tooltip-format": "Left: Notifications\nRight: Do not disturb",
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "notifications_active",
+            "none": "notifications",
+            "dnd-notification": "notifications_active",
+            "dnd-none": "notifications_paused",
+            "inhibited-notification": "notification_important",
+            "inhibited-none": "notification_important",
+            "dnd-inhibited-notification": "notification_off",
+            "dnd-inhibited-none": "notifications_off"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    }
+}
+

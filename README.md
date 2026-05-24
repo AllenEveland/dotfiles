@@ -20,3 +20,14 @@ Shellscript: ```bash``` ```zsh```
 
 Launcher: ```rofi```
 
+# Installation
+
+```bash
+git clone https://github.com/AllenEveland/hyprconfig.git
+cd hyprconfig;
+```
+
+```bash
+chmod +x install.sh
+./install.sh
+```

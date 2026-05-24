@@ -11,7 +11,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "colors.rasi"
+@import                          "~/.allenconf/colors/colors.rasi"
 
 * {
     border-colour:               var(selected);

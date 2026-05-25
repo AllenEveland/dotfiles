@@ -83,9 +83,20 @@ confirm_backup() {
 # ─────────────────────────────────────────
 #  Function: remove dir
 # ─────────────────────────────────────────
-# ! NOTE: Continue to write
+DIR=(
+    ~/.allenconf
+    ~/.config/hypr
+    ~/.config/waybar
+    ~/.config/rofi
+    ~/.config/swaync
+)
 remove_dir() {
     echo -e "\n${CYAN}${BOLD}[3/5] Remove dir...${RESET}"
+    for pkg in "${DIR[@]}"; do
+        if [ -d "$pkg" ]; then
+            rm -rf "$pkg"
+        fi
+    done
 }
 
 # ─────────────────────────────────────────

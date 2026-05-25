@@ -60,7 +60,7 @@
         "calendar": {
             "mode": "month",
             "format": {
-                "months": "<span color='#F5C2E7'><b>{}</b></span>",
+                "months": "<span color='#89B4FA'><b>{}</b></span>",
                 "weekdays": "<span color='#89B4FA'><b>{}</b></span>",
                 "days": "<span color='#CDD6F4'><b>{}</b></span>",
                 "today": "<span color='#F9E2AF'><b>{}</b></span>",

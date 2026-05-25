@@ -4,71 +4,44 @@
 }
 
 window#waybar {
-    background-color: rgba(30, 30, 30, 0.6);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    background-color: rgba(18, 18, 18, 0.6);
+    color: #c0c0c0;
+    border: none;
 }
 
-/* ═══════════════════════════
-   WORKSPACES
-═══════════════════════════ */
+/* ── LEFT ── Workspaces ───────────────────────────── */
 
 #workspaces {
-    margin: 3px 6px;
     background: transparent;
+    padding: 0 4px;
 }
 
 #workspaces button {
-    min-width: 20px;
-    min-height: 20px;
-    padding: 1px 5px;
-    margin: 0 2px;
-    border-radius: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    background-color: rgba(255, 255, 255, 0.05);
-    color: rgba(200, 200, 200, 0.45);
+    background-color: rgba(50, 50, 50, 0.6);
+    color: #666;
+    min-width: 26px;
+    min-height: 26px;
+    padding: 0 3px;
+    margin: 4px 3px;
+    border-radius: 6px;
+    border: none;
     box-shadow: none;
     transition: none;
 }
 
 #workspaces button.active {
-    background-color: rgba(210, 210, 210, 0.16);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    color: rgba(255, 255, 255, 0.92);
-    font-weight: bold;
+    background-color: rgba(110, 110, 110, 0.85);
+    color: #e8e8e8;
 }
 
-#workspaces button.urgent {
-    background-color: rgba(210, 80, 80, 0.3);
-    border: 1px solid rgba(210, 80, 80, 0.5);
-    color: #e8a0a0;
-}
-
-/* ═══════════════════════════
-   CLOCK
-═══════════════════════════ */
+/* ── CENTER ── Clock ──────────────────────────────── */
 
 #clock {
-    color: #90b8d8;
     padding: 0 14px;
-    letter-spacing: 0.3px;
+    color: #c0c0c0;
 }
 
-tooltip {
-    background-color: rgba(22, 22, 22, 0.96);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-}
-
-tooltip label {
-    color: #c5cfe0;
-    padding: 4px 8px;
-    font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 13px;
-}
-
-/* ═══════════════════════════
-   RIGHT
-═══════════════════════════ */
+/* ── RIGHT ── Modules ─────────────────────────────── */
 
 #tray,
 #pulseaudio,
@@ -76,92 +49,24 @@ tooltip label {
 #power-profiles-daemon,
 #custom-notification,
 #battery {
-    padding: 2px 10px;
-    margin: 3px 2px;
-}
-
-/* ═══════════════════════════
-   TRAY
-═══════════════════════════ */
-
-#tray {
-    background-color: rgba(160, 160, 160, 0.08);
-    border: 1px solid rgba(160, 160, 160, 0.12);
-    color: rgba(190, 190, 190, 0.75);
-    padding: 2px 6px;
-}
-
-/* ═══════════════════════════
-   PULSEAUDIO
-═══════════════════════════ */
-
-#pulseaudio {
-    background-color: rgba(88, 140, 196, 0.12);
-    border: 1px solid rgba(88, 140, 196, 0.18);
-    color: #7aabd6;
-}
-
-#pulseaudio.muted {
-    color: rgba(120, 160, 200, 0.5);
-}
-
-/* ═══════════════════════════
-   NETWORK
-═══════════════════════════ */
-
-#network {
-    background-color: rgba(72, 160, 130, 0.12);
-    border: 1px solid rgba(72, 160, 130, 0.18);
-    color: #68b8a0;
-}
-
-#network.disconnected {
-    color: rgba(100, 180, 155, 0.4);
-}
-
-/* ═══════════════════════════
-   POWER PROFILES
-═══════════════════════════ */
-
-#power-profiles-daemon {
-    background-color: rgba(185, 148, 70, 0.12);
-    border: 1px solid rgba(185, 148, 70, 0.18);
-    color: #c4a45a;
-}
-
-/* ═══════════════════════════
-   NOTIFICATION
-═══════════════════════════ */
-
-#custom-notification {
-    background-color: rgba(185, 105, 155, 0.12);
-    border: 1px solid rgba(185, 105, 155, 0.18);
-    color: #c088aa;
-}
-
-/* ═══════════════════════════
-   BATTERY
-═══════════════════════════ */
-
-#battery {
-    background-color: rgba(95, 168, 100, 0.12);
-    border: 1px solid rgba(95, 168, 100, 0.18);
-    color: #78b880;
-}
-
-#battery.charging,
-#battery.plugged {
-    color: #90cc90;
+    padding: 0 10px;
+    color: #c0c0c0;
 }
 
 #battery.warning {
-    background-color: rgba(195, 155, 55, 0.14);
-    border: 1px solid rgba(195, 155, 55, 0.20);
-    color: #c8a840;
+    color: #d4a84b;
 }
 
 #battery.critical {
-    background-color: rgba(195, 65, 65, 0.16);
-    border: 1px solid rgba(195, 65, 65, 0.22);
-    color: #c86060;
+    color: #c0504a;
+}
+
+/* ── Tooltip ──────────────────────────────────────── */
+
+tooltip {
+    background: rgba(18, 18, 18, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: #c0c0c0;
+    padding: 6px 10px;
 }

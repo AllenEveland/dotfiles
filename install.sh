@@ -43,7 +43,7 @@ PACKAGES=(
 #  Function: Install packages
 # ─────────────────────────────────────────
 install_packages() {
-    echo -e "\n${CYAN}${BOLD}[1/3] Installing packages...${RESET}"
+    echo -e "\n${CYAN}${BOLD}[1/5] Installing packages...${RESET}"
     echo -e "${YELLOW}Packages to be installed:${RESET}"
     for pkg in "${PACKAGES[@]}"; do
         echo -e "  ${GREEN}+${RESET} $pkg"
@@ -59,7 +59,7 @@ install_packages() {
 #  Ask user if they have backed up
 # ─────────────────────────────────────────
 confirm_backup() {
-    echo -e "\n${CYAN}${BOLD}[2/3] Backup check...${RESET}"
+    echo -e "\n${CYAN}${BOLD}[2/5] Backup check...${RESET}"
     echo -e "${YELLOW}⚠  This script will overwrite files in ${BOLD}~/.config/${RESET}${YELLOW} and your personal config directory.${RESET}"
     echo -ne "${BOLD}Have you backed up your data? [Y/n]: ${RESET}"
     read -r answer
@@ -81,10 +81,18 @@ confirm_backup() {
 }
 
 # ─────────────────────────────────────────
+#  Function: remove dir
+# ─────────────────────────────────────────
+# ! NOTE: Continue to write
+remove_dir() {
+    echo -e "\n${CYAN}${BOLD}[3/5] Remove dir...${RESET}"
+}
+
+# ─────────────────────────────────────────
 #  Function: Copy configs
 # ─────────────────────────────────────────
 copy_configs() {
-    echo -e "\n${CYAN}${BOLD}[3/3] Copying config files...${RESET}"
+    echo -e "\n${CYAN}${BOLD}[4/5] Copying config files...${RESET}"
 
     # ── Copy ./config/* → ~/.config/ ─────
     if [ -d "./config" ]; then
@@ -123,6 +131,7 @@ FILES=(
     workspace_action.sh
 )
 change_mode() {
+    echo -e "\n${CYAN}${BOLD}[5/5] Change file mode to executable...${RESET}"
     if [ -d "$HOME/.allenconf/scripts" ]; then
         for files in "${FILES[@]}"; do
             chmod +x "$HOME/.allenconf/scripts/$files"
@@ -142,6 +151,7 @@ echo -e "${RESET}"
 
 install_packages
 confirm_backup
+remove_dir
 copy_configs
 change_mode
 

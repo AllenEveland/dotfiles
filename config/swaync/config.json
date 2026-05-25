@@ -15,11 +15,11 @@
     "control-center-positionX": "right",
     "control-center-positionY": "top",
     "control-center-margin-top": 8,
-    "control-center-margin-bottom": 0,
+    "control-center-margin-bottom": 230,
     "control-center-margin-right": 8,
     "control-center-margin-left": 0,
-    "control-center-height": 850,
-    "control-center-width": 400,
+    "control-center-height": 600,
+    "control-center-width": 420,
 
     "layer": "overlay",
     "control-center-layer": "overlay",
@@ -49,3 +49,4 @@
         }
     }
 }
+

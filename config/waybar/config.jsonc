@@ -51,6 +51,7 @@
             "default": [" "],
         },
         "on-click": "pavucontrol",
+        "tooltip": false,
     },
 
     "clock": {

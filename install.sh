@@ -29,6 +29,7 @@ PACKAGES=(
     ttf-firacode-nerd
     ttf-jetbrains-mono
     ttf-jetbrains-mono-nerd
+    ttf-font-awesome
     btop
     nautilus
     grim

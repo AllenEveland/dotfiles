@@ -122,15 +122,10 @@ nnoremap <silent> <C-Up>    :resize -1<CR>
 nnoremap <silent> <F1> :sp<CR>
 nnoremap <silent> <F2> :vs<CR>
 
-" Show shortmess
-nnoremap <silent> <leader>ms :messages<CR>
-
 " Turn off highlight mode
 nnoremap <silent> <leader>nh :noh<CR>
 
 " Teminal
-set splitright
-nnoremap <silent> <F11> :vert term<CR>
 nnoremap <silent> <F12> :belowright term<CR>
 tnoremap <Esc> <C-\><C-n>
 tnoremap <C-h> <C-\><C-n><C-w>h

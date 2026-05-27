@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # ─────────────────────────────────────────
 #  Setup Script – Hyprland Environment
@@ -38,6 +38,9 @@ PACKAGES=(
     libvips
     openslide
     imagemagick
+    neovim
+    vim
+    tmux
 )
 
 # ─────────────────────────────────────────
@@ -90,6 +93,9 @@ DIR=(
     ~/.config/waybar
     ~/.config/rofi
     ~/.config/swaync
+    ~/.config/alacritty
+    ~/.config/kitty
+    ~/.config/nvim
 )
 remove_dir() {
     echo -e "\n${CYAN}${BOLD}[3/5] Remove dir...${RESET}"

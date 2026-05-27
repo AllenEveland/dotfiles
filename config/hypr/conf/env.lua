@@ -1,5 +1,6 @@
 -- session
 hl.env("XDG_SESSION_TYPE", "wayland")
+hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 
 -- cursor
@@ -18,10 +19,12 @@ hl.env("CLUTTER_BACKEND", "wayland")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 hl.env("_JAVA_AWT_WM_NONREPARENTING", "1")
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 
 -- nvidia
 hl.env("WLR_NO_HARDWARE_CURSORS", "1")
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
 hl.env("GBM_BACKEND", "nvidia-drm")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+hl.env("WLR_RENDERER_ALLOW_SOFTWARE", "1")
 

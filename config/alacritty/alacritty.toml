@@ -1,0 +1,45 @@
+[colors.primary]
+background = "#212121"
+foreground = "#d0d0d0"
+
+[colors.normal]
+black   = "#212121"
+red     = "#c0464c"
+green   = "#4caa5e"
+yellow  = "#b8963e"
+blue    = "#4a7fb5"
+magenta = "#8f57b0"
+cyan    = "#3d9aa1"
+white   = "#c8c8c8"
+
+[colors.bright]
+black   = "#646464"
+red     = "#d4595f"
+green   = "#5cbd70"
+yellow  = "#ccaa4e"
+blue    = "#5b91c8"
+magenta = "#a36bc4"
+cyan    = "#4db3bb"
+white   = "#ffffff"
+
+[general]
+live_config_reload = true
+
+[window]
+opacity = 1.0
+blur = false
+startup_mode = "Maximized"
+
+[font]
+normal = { family = "JetbrainsMono Nerd Font", style = "Regular" }
+size = 10.10
+
+[cursor]
+style = { shape = "Block", blinking = "Off" }
+
+[terminal]
+shell = "/usr/bin/zsh"
+
+[mouse]
+hide_when_typing = true
+

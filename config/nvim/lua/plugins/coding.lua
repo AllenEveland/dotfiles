@@ -194,7 +194,7 @@ return {
 
             vim.diagnostic.config({
                 virtual_text = true,
-                signs = true,
+                signs = false,
                 underline = true,
                 update_in_insert = false,
                 severity_sort = true,
@@ -247,6 +247,10 @@ return {
         config = function(_, opts)
             require("trouble").setup(opts)
         end,
-        keys = {},
+        keys = {
+            { "<leader>td", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+            { "<leader>tb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+            { "<leader>tq", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
+        },
     },
 }

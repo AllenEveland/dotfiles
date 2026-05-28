@@ -5,7 +5,7 @@ return {
         config = function()
             require("onedark").setup({
                 style = "warmer",
-                transparent = false,
+                transparent = true,
                 term_colors = true,
                 ending_tildes = false,
                 code_style = {

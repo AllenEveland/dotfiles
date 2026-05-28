@@ -20,41 +20,6 @@ return {
     },
 
     {
-        "nvim-tree/nvim-tree.lua",
-        lazy = false,
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-        },
-        config = function()
-            require("nvim-tree").setup({
-                view = {
-                    width = 30,
-                    side = "left",
-                },
-                renderer = {
-                    group_empty = true,
-                    indent_markers = {
-                        enable = true,
-                    },
-                },
-                update_focused_file = {
-                    enable = true,
-                    update_root = false,
-                },
-                filters = {
-                    dotfiles = false,
-                },
-                git = {
-                    enable = true,
-                    ignore = false,
-                },
-            })
-
-            vim.keymap.set("n", "<leader>fe", ":NvimTreeToggle<CR>", { silent = true })
-        end,
-    },
-
-    {
         "nvim-treesitter/nvim-treesitter",
         branch = "main",
         lazy = false,
@@ -156,6 +121,7 @@ return {
         "nvim-telescope/telescope.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-file-browser.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 build = "make",
@@ -182,6 +148,18 @@ return {
                     })
                 end,
                 desc = "Find all (hidden + ignored)",
+                mode = "n",
+            },
+
+            {
+                "<leader>fe",
+                function()
+                    require("telescope").extensions.file_browser.file_browser({
+                        path = "%:p:h",
+                        select_buffer = true,
+                    })
+                end,
+                desc = "File Browser",
                 mode = "n",
             },
 
@@ -361,8 +339,8 @@ return {
                     sorting_strategy = "ascending",
 
                     layout_config = {
-                        width = 0.9,
-                        height = 0.9,
+                        width = 0.8,
+                        height = 0.8,
                         preview_cutoff = 120,
                         prompt_position = "top",
                     },
@@ -400,9 +378,31 @@ return {
                         override_file_sorter = true,
                         case_mode = "smart_case",
                     },
+                    file_browser = {
+                        theme = "dropdown",
+                        hijack_netrw = true,
+                        layout_strategy = "horizontal",
+                            layout_config = {
+                                horizontal = {
+                                    width = 0.8,
+                                    height = 0.8,
+                                    preview_width = 0.5,
+                                },
+                        },
+                        mappings = {
+                            ["i"] = {
+                                ["<A-a>"] = require("telescope._extensions.file_browser.actions").create,
+                                ["<A-d>"] = require("telescope._extensions.file_browser.actions").remove,
+                                ["<A-r>"] = require("telescope._extensions.file_browser.actions").rename,
+                                ["<A-m>"] = require("telescope._extensions.file_browser.actions").move,
+                                ["<A-c>"] = require("telescope._extensions.file_browser.actions").copy,
+                            },
+                        },
+                    },
                 },
             })
             require("telescope").load_extension("fzf")
+            require("telescope").load_extension("file_browser")
         end,
     },
 

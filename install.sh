@@ -87,7 +87,7 @@ confirm_backup() {
 # ─────────────────────────────────────────
 #  Function: remove dir
 # ─────────────────────────────────────────
-DIR=(
+DIR_AND_FILES=(
     ~/.allenconf
     ~/.config/hypr
     ~/.config/waybar
@@ -96,9 +96,11 @@ DIR=(
     ~/.config/alacritty
     ~/.config/kitty
     ~/.config/nvim
+    ~/.vimrc
+    ~/.tmux.conf
 )
-remove_dir() {
-    echo -e "\n${CYAN}${BOLD}[3/5] Remove dir...${RESET}"
+remove_dir_and_file() {
+    echo -e "\n${CYAN}${BOLD}[3/5] Remove something...${RESET}"
     for pkg in "${DIR[@]}"; do
         if [ -d "$pkg" ]; then
             rm -rf "$pkg"
@@ -122,7 +124,7 @@ copy_configs() {
         echo -e "${RED}  ✘ Directory ./config not found – skipping.${RESET}"
     fi
 
-    # ── Copy ./allenconf/* → ~/<username>conf/ ──
+    # ── Copy ./allenconf/* → ~/.allenconf/ ──
     if [ -d "./allenconf" ]; then
         DEST_DIR="$HOME/.allenconf"
         echo -e "${YELLOW}→ Copying ./allenconf/* to ${DEST_DIR}/${RESET}"
@@ -132,6 +134,10 @@ copy_configs() {
     else
         echo -e "${RED}  ✘ Directory ./allenconf not found – skipping.${RESET}"
     fi
+
+    # Copy .vimrc and .tmux.conf
+    cp .vimrc ~
+    cp .tmux.conf ~
 }
 
 # ─────────────────────────────────────────
@@ -169,7 +175,7 @@ echo -e "${RESET}"
 
 install_packages
 confirm_backup
-remove_dir
+remove_dir_and_file
 copy_configs
 change_mode
 

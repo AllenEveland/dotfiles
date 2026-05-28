@@ -381,6 +381,8 @@ return {
                     file_browser = {
                         theme = "dropdown",
                         hijack_netrw = true,
+                        hidden = true,
+                        no_ignore = true,
                         layout_strategy = "horizontal",
                             layout_config = {
                                 horizontal = {

@@ -1,16 +1,16 @@
 --------------------------------------------------------------------------------
--- Animation Master Switch
+-- Animation
 --------------------------------------------------------------------------------
 hl.config({
     general = {
         gaps_in  = 2,
-        gaps_out = 5,
+        gaps_out = 2,
 
         border_size = 1,
 
         col = {
-            active_border = "rgba(0DB7D455)",
-            inactive_border = "rgba(31313600)"
+            active_border = "rgba(44464f77)",
+            inactive_border = "rgba(1a1b2033)",
         },
 
         resize_on_border = false,
@@ -20,24 +20,48 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 4,
-        rounding_power = 2,
+        rounding       = 0,
+        rounding_power = 1,
 
         -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
-        inactive_opacity = 0.95,
+        inactive_opacity = 0.92,
 
         blur = {
-            enabled   = true,
+            enabled   = false,
             size      = 3,
             passes    = 3,
-            vibrancy  = 0.5,
         },
+    },
+
+    misc = {
+        disable_hyprland_logo = true,
+        disable_splash_rendering = true,
+        vrr = 1,
+        mouse_move_enables_dpms = true,
+        key_press_enables_dpms = true,
+        animate_manual_resizes = true,
+        animate_mouse_windowdragging = true,
+        on_focus_under_fullscreen = 2,
+        allow_session_lock_restore = true,
+        session_lock_xray = true,
+        initial_workspace_tracking = false,
+        focus_on_activate = true
+    },
+
+    xwayland = {
+        force_zero_scaling = true
     },
 
     animations = {
         enabled = true,
-    }
+    },
+
+    dwindle = {
+        preserve_split = true,
+        smart_split = false,
+        smart_resizing = false
+    },
 })
 
 --------------------------------------------------------------------------------

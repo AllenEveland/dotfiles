@@ -4,7 +4,7 @@
 }
 
 window#waybar {
-    background-color: rgba(18, 18, 18, 0.6);
+    background-color: rgba(30, 30, 30, 1);
     color: #c0c0c0;
     border: none;
 }
@@ -17,7 +17,7 @@ window#waybar {
 }
 
 #workspaces button {
-    background-color: rgba(50, 50, 50, 0.6);
+    background-color: rgba(50, 50, 50, 0.8);
     color: #666;
     min-width: 22px;
     min-height: 26px;

@@ -31,11 +31,44 @@ hl.window_rule({
     float = true,
 })
 
--- Blur waybar
-hl.layer_rule({
+-- Turn off blur
+hl.window_rule({
     match = {
-        namespace = "waybar"
+        class = ".*"
     },
-    blur = true
+    no_blur = true
+})
+
+-- Floating & Center
+local floating_titles = {
+    "Open File", "Select a File", "Choose wallpaper", 
+    "Open Folder", "Save As", "Library", "File Upload",
+    "wants to save", "wants to open"
+}
+for _, title in ipairs(floating_titles) do
+    hl.window_rule({
+        match = {
+            title = "^(" .. title .. ")(.*)$"
+        },
+        float = true,
+        center = true
+    })
+end
+
+-- Tearing
+hl.window_rule({
+    match = {
+        title = ".*\\.exe|.*minecraft.*",
+        class = "^(steam_app).*"
+    },
+    immediate = true
+})
+
+-- No shader
+hl.window_rule({
+    match = {
+        float = 0
+    },
+    no_shadow = true
 })
 

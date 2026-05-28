@@ -35,7 +35,7 @@ vim.keymap.set('n', '<C-s>', ':w<CR>', opts)
 vim.keymap.set('n', '<Tab>', ':bnext<CR>', opts)
 vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', opts)
 
-vim.keymap.set('n', '<leader>x', ':Bdelete<CR>', opts)
+vim.keymap.set('n', '<leader>x', ':bdelete<CR>', opts)
 
 -- Force quit fast
 vim.keymap.set('n', '<leader>qq', ':q!<CR>', opts)

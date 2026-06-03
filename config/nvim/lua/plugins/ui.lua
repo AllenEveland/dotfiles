@@ -34,16 +34,16 @@ return {
             require("lualine").setup({
                 options = {
                     theme = "onedark",
-                    section_separators = { left = "", right = "" },
-                    component_separators = { left = "", right = "" },
+                    section_separators = { left = "", right = "" },
+                    component_separators = { left = "", right = "" },
                     globalstatus = true,
                     icons_enabled = true,
                 },
                 sections = {
-                    lualine_a = { { "mode", icon = "" } },
+                    lualine_a = { { "mode" } },
                     lualine_b = {
                         "branch",
-                        { "diff", symbols = { added = " ", modified = " ", removed = " " } },
+                        { "diff", symbols = { added = " ", modified = " ", removed = " " } },
                         { "filename", file_status = true, path = 1, gui = "bold" },
                     },
                     lualine_c = { "%=" },
@@ -52,13 +52,13 @@ return {
                             function()
                                 local clients = vim.lsp.get_clients({ bufnr = 0 })
                                 if #clients == 0 then return "" end
-                                return " " .. clients[1].name
+                                return "  " .. clients[1].name
                             end,
                         },
                         {
                             "diagnostics",
                             sources = { "nvim_diagnostic" },
-                            symbols = { error = " ", warn = " ", info = " " },
+                            symbols = { error = " ", warn = " ", info = " " },
                         },
                     },
                     lualine_y = {
@@ -77,16 +77,11 @@ return {
                             "diagnostics",
                             sources = { "nvim_diagnostic" },
                             sections = { "error", "warn" },
-                            symbols = { error = " ", warn = " " },
+                            symbols = { error = " ", warn = " " },
                             diagnostics_color = {
                                 error = { fg = "#e06c75" },
                                 warn  = { fg = "#d19a66" },
                             },
-                            update_in_insert = true,
-                            always_visible = false,
-                            cond = function()
-                                return #vim.lsp.get_clients({ bufnr = 0 }) > 0
-                            end,
                         },
                     },
                     lualine_y = {},
@@ -95,7 +90,6 @@ return {
             })
         end,
     },
-
     {
         "rcarriga/nvim-notify",
         lazy = false,

@@ -41,8 +41,9 @@ hl.window_rule({
 
 -- Floating & Center
 local floating_titles = {
-    "Open File", "Select a File", "Choose wallpaper", 
+    "Open File", "Select a File", "Choose wallpaper",
     "Open Folder", "Save As", "Library", "File Upload",
+    "Pick Files",
     "wants to save", "wants to open"
 }
 for _, title in ipairs(floating_titles) do

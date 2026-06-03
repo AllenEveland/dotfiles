@@ -312,54 +312,6 @@ return {
         config = function()
             require("nvim-surround").setup({})
         end,
-    },
-
-    {
-        "goolord/alpha-nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-
-        config = function()
-            local alpha = require("alpha")
-            local dashboard = require("alpha.themes.dashboard")
-
-            -- =========================
-            -- BANNER
-            -- =========================
-            dashboard.section.header.val = {
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗",
-                "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║",
-                "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║",
-                "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║",
-                "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║",
-                "╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝",
-                " ",
-            }
-
-            -- =========================
-            -- MENU
-            -- =========================
-            dashboard.section.buttons.val = {
-                dashboard.button("SPC f e", "󰙅  File explorer"),
-                dashboard.button("SPC f f", "󰱼  Find file"),
-                dashboard.button("SPC f a", "󰈞  Find all thing"),
-                dashboard.button("SPC f k", "󰌌  Keymap list"),
-                dashboard.button("SPC t f", "  Floating terminal"),
-                dashboard.button("SPC t d", "  Down terminal"),
-                dashboard.button("SPC a a", "󰚩  Avante AI Chat"),
-            }
-
-            dashboard.section.header.opts.hl = "Type"
-            dashboard.section.buttons.opts.hl = "Keyword"
-
-            -- disable auto folding
-            vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
-            alpha.setup(dashboard.opts)
-        end,
     }
+
 }

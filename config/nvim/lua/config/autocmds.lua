@@ -6,8 +6,6 @@ local function set_transparent()
     hl(0, "CursorLineNr", { bg = "none" })
     hl(0, "LineNr",       { bg = "none" })
     hl(0, "SignColumn",   { bg = "none" })
-
-    hl(0, "Pmenu",        { bg = "#303030" })
 end
 
 vim.api.nvim_create_autocmd("ColorScheme", {

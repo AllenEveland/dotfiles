@@ -37,10 +37,10 @@ return {
             })
             treesitter.install({
                 -- Main language
-                "python", "c", "cpp", "rust", "asm", "llvm",
+                "python", "c", "cpp", "asm", "llvm",
 
                 -- Other important script language
-                "lua", "bash",
+                "bash",
 
                 -- Build language
                 "cmake", "make",

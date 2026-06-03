@@ -145,53 +145,6 @@ return {
             })
             vim.lsp.enable("pyright")
 
-            -- [[ LSP for Lua ]]
-            vim.lsp.config("lua_ls", {
-                cmd = { "lua-language-server" },
-                root_markers = {
-                    ".luarc.json",
-                    ".luarc.jsonc",
-                    ".luacheckrc",
-                    "stylua.toml",
-                    ".stylua.toml",
-                    "selene.toml",
-                    ".git",
-                },
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    Lua = {
-                        runtime = {
-                            version = "Lua 5.4",
-                        },
-                        diagnostics = {
-                            enable = true,
-                        },
-                        workspace = {
-                            checkThirdParty = false,
-                        },
-                        completion = {
-                            callSnippet = "Replace",
-                            keywordSnippet = "Replace",
-                        },
-                        hint = {
-                            enable = true,
-                            setType = true,
-                            paramType = true,
-                            paramName = "All",
-                            arrayIndex = "Auto",
-                        },
-                        format = {
-                            enable = false,
-                        },
-                        telemetry = {
-                            enable = false,
-                        },
-                    },
-                },
-            })
-            vim.lsp.enable("lua_ls")
-
             vim.diagnostic.config({
                 virtual_text = true,
                 signs = false,

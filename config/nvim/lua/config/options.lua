@@ -21,12 +21,12 @@ vim.opt.ttimeoutlen = 0
 vim.opt.mouse = "a"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.fillchars = { eob=" " }
-vim.opt.shortmess:append("sI")
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.laststatus = 3
 vim.opt.termguicolors = true
-
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+vim.g.netrw_liststyle = 3
+vim.g.netrw_banner = 0
+vim.g.netrw_browse_split = 4
+vim.g.netrw_winsize = 20
 vim.g.mapleader = " "
 vim.o.cursorline = true

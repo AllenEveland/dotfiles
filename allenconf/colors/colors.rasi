@@ -1,11 +1,9 @@
 * {
-    background:     #1E2127FF;
-    background-alt: #282B31FF;
-    foreground:     #FFFFFFFF;
-    selected:       #61AFEFFF;
-    active:         #98C379FF;
-    urgent:         #E06C75FF;
-
-    font: "Jetbrains Mono Nerd Font 10";
+    background:     #1A1C1EFF;
+    background-alt: #222528FF;
+    foreground:     #E2E5EAFF;
+    selected:       #9097A0FF;
+    active:         #6B9E7AFF;
+    urgent:         #C0706AFF;
+    font: "JetBrainsMono Nerd Font 10";
 }
-

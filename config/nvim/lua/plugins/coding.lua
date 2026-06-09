@@ -3,9 +3,12 @@ return {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         dependencies = {
+            "saadparwaiz1/cmp_luasnip",
             "L3MON4D3/LuaSnip",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
         },
         config = function()
             local cmp = require('cmp')
@@ -48,6 +51,9 @@ return {
                     ['<CR>']    = cmp.mapping.confirm({ select = true }),
                     ['<Tab>']   = cmp.mapping.select_next_item(),
                     ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+                    ['<C-b>']   = cmp.mapping.scroll_docs(-4),
+                    ['<C-f>']   = cmp.mapping.scroll_docs(4),
+                    ['<C-e>']   = cmp.mapping.abort(),
                 },
                 formatting = {
                     format = function(entry, item)
@@ -57,6 +63,7 @@ return {
                 },
                 sources = cmp.config.sources({
                     { name = 'nvim_lsp' },
+                    { name = 'nvim_lsp_signature_help' },
                     { name = 'buffer' },
                     { name = 'path' },
                     { name = 'luasnip' },
@@ -94,7 +101,13 @@ return {
                 local opts = { noremap = true, silent = true, buffer = bufnr }
                 vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
                 vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+                vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
                 vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+                vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+                vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+                vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
             end
 
             -- [[ LSP for C,C++ ]]
@@ -146,14 +159,10 @@ return {
             vim.lsp.enable("pyright")
 
             vim.diagnostic.config({
-                virtual_text = true,
-                signs = false,
+                virtual_text = false,
                 underline = true,
                 update_in_insert = false,
                 severity_sort = true,
-            })
-
-            vim.diagnostic.config({
                 signs = {
                     text = {
                         [vim.diagnostic.severity.ERROR] = " ",

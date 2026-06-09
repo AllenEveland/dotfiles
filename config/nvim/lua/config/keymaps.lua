@@ -40,5 +40,3 @@ vim.keymap.set('n', '<leader>x', ':bdelete<CR>', opts)
 -- Force quit fast
 vim.keymap.set('n', '<leader>qq', ':q!<CR>', opts)
 
--- NetRW
-vim.keymap.set('n', '<leader>fn', ':Lexplore<CR>', opts)

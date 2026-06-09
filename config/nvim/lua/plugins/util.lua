@@ -13,39 +13,41 @@ return {
         lazy = false,
         version = false,
         cond = function()
-            local APIKEY = "OPENAI_API_KEY"
-            local key = os.getenv(APIKEY)
-            if not key or key == "" then
-                vim.schedule(function()
-                    vim.notify("Avante disabled: " .. APIKEY .. " not found", vim.log.levels.WARN)
-                end)
-                return false
+            local keys = {
+                OPENAI  = "OPENAI_API_KEY",
+                CLAUDE  = "ANTHROPIC_API_KEY",
+            }
+            for name, var in pairs(keys) do
+                local val = os.getenv(var)
+                if val and val ~= "" then
+                    return true
+                end
             end
-            return true
+            vim.schedule(function()
+                vim.notify("Avante disabled: no API key found (OPENAI_API_KEY or ANTHROPIC_API_KEY)", vim.log.levels.WARN)
+            end)
+            return false
         end,
-
+ 
         dependencies = {
             "folke/snacks.nvim",
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
             "nvim-tree/nvim-web-devicons",
         },
-
+ 
         opts = {
             provider = "openai",
             providers = {
-                -- OpenAI
                 openai = {
                     endpoint = "https://api.openai.com/v1",
                     model = "gpt-4o-mini",
                     timeout = 30000,
                     extra_request_body = {
                         temperature = 0,
-                        max_tokens = 8182,
+                        max_tokens = 8192,
                     },
                 },
-
-                -- Claude
                 claude = {
                     endpoint = "https://api.anthropic.com/v1/messages",
                     model = "claude-3-5-sonnet-20241022",
@@ -56,7 +58,6 @@ return {
                     },
                 },
             },
-
             behaviour = {
                 auto_suggestions = false,
                 auto_apply_diff_after_generation = false,
@@ -118,13 +119,13 @@ return {
 
             vim.keymap.set("n", "<leader>/", function()
                 require("Comment.api").toggle.linewise.current()
-            end)
+            end, { desc = "Toggle comment" })
 
             vim.keymap.set("v", "<leader>/", function()
                 local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
                 vim.api.nvim_feedkeys(esc, "nx", false)
                 require("Comment.api").toggle.linewise(vim.fn.visualmode())
-            end)
+            end, { desc = "Toggle comment" })
         end,
     },
 
@@ -158,13 +159,16 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" },
         event = "VeryLazy",
         config = function()
-            local wk = require("which-key")
-
-            wk.setup({
+            require("which-key").setup({
                 plugins = {
                     spelling = { enabled = true, suggestions = 20 },
                 },
-                triggers = { "<leader>" },
+                triggers = {
+                    { "<leader>", mode = { "n", "v" } },
+                    { "<A-",     mode = { "n" } },
+                    { "[",       mode = { "n" } },
+                    { "]",       mode = { "n" } },
+                },
                 show_help = false,
                 win = {
                     border = "rounded",
@@ -173,9 +177,10 @@ return {
         end,
     },
 
+
     {
         "folke/todo-comments.nvim",
-        event = "BufReadPost",
+        event = { "BufReadPost", "BufNewFile" },
         dependencies = { "nvim-lua/plenary.nvim" },
         cmd = { "TodoTrouble", "TodoTelescope" },
 

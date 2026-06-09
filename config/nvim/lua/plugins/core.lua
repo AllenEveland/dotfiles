@@ -16,7 +16,16 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        opts = {},
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            require("ibl").setup({
+                scope = {
+                    enabled = true,
+                    show_start = false,
+                    show_end = false,
+                },
+            })
+        end,
     },
 
     {
@@ -35,29 +44,16 @@ return {
                     enable = true,
                 },
             })
+
             treesitter.install({
-                -- Main language
-                "python", "c", "cpp", "asm", "llvm",
-
-                -- Other important script language
+                "python", "c", "cpp", "asm", "llvm", "rust",
                 "bash",
-
-                -- Build language
-                "cmake", "make",
-                "ninja",
-                "dockerfile",
-
-                -- Advanced shell
+                "cmake", "make", "ninja", "dockerfile",
                 "awk", "regex",
-
-                -- Other
                 "javascript", "typescript", "json",
                 "markdown", "markdown_inline",
                 "query",
-
-                -- Config file
-                "yaml", "toml",
-                "ini", "gitignore",
+                "yaml", "toml", "ini", "gitignore",
             })
 
             require("nvim-treesitter-textobjects").setup({
@@ -71,49 +67,52 @@ return {
             })
 
             vim.api.nvim_create_autocmd("FileType", {
-                pattern = { "*" },
+                pattern = "*",
                 callback = function(args)
-                    local buf = args.buf
-                    local max_lines    = 50000
-                    local max_filesize = 10 * 1024 * 1024
+                    local buf           = args.buf
+                    local max_lines     = 50000
+                    local max_filesize  = 10 * 1024 * 1024
 
                     local too_large = vim.api.nvim_buf_line_count(buf) > max_lines
-                    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
                     if ok and stats and stats.size > max_filesize then
                         too_large = true
                     end
 
                     if not too_large then
                         pcall(vim.treesitter.start, buf)
+                        vim.wo[0][0].foldmethod = "expr"
+                        vim.wo[0][0].foldexpr   = "v:lua.vim.treesitter.foldexpr()"
+                        vim.wo[0][0].foldenable  = false
                     else
-                        vim.notify("ERROR: File too large to parsing", vim.log.levels.ERROR)
+                        vim.notify("File too large for treesitter parsing", vim.log.levels.WARN)
                     end
-
-                    vim.wo[0][0].foldmethod = "expr"
-                    vim.wo[0][0].foldexpr   = "v:lua.vim.treesitter.foldexpr()"
-                    vim.wo[0][0].foldenable = false
                 end,
             })
 
             vim.keymap.set({ "n", "x", "o" }, "]f", function()
                 require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
-            end)
+            end, { desc = "Next function start" })
+
             vim.keymap.set({ "n", "x", "o" }, "]c", function()
                 require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
-            end)
+            end, { desc = "Next class start" })
+
             vim.keymap.set({ "n", "x", "o" }, "[f", function()
                 require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
-            end)
+            end, { desc = "Prev function start" })
+
             vim.keymap.set({ "n", "x", "o" }, "[c", function()
                 require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
-            end)
+            end, { desc = "Prev class start" })
 
             vim.keymap.set("n", ">a", function()
                 require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner", "textobjects")
-            end)
+            end, { desc = "Swap next parameter" })
+
             vim.keymap.set("n", "<a", function()
                 require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner", "textobjects")
-            end)
+            end, { desc = "Swap prev parameter" })
         end,
     },
 
@@ -121,7 +120,9 @@ return {
         "nvim-telescope/telescope.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
             "nvim-telescope/telescope-file-browser.nvim",
+            "folke/todo-comments.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 build = "make",
@@ -132,25 +133,16 @@ return {
         keys = {
             {
                 "<leader>ff",
-                function()
-                    require("telescope.builtin").find_files()
-                end,
+                function() require("telescope.builtin").find_files() end,
                 desc = "Find files",
-                mode = "n",
             },
-
             {
                 "<leader>fa",
                 function()
-                    require("telescope.builtin").find_files({
-                        hidden = true,
-                        no_ignore = true,
-                    })
+                    require("telescope.builtin").find_files({ hidden = true, no_ignore = true })
                 end,
                 desc = "Find all (hidden + ignored)",
-                mode = "n",
             },
-
             {
                 "<leader>fe",
                 function()
@@ -159,148 +151,82 @@ return {
                         select_buffer = true,
                     })
                 end,
-                desc = "File Browser",
-                mode = "n",
+                desc = "File browser",
             },
-
             {
                 "<leader>fw",
                 function()
-                    require("telescope.builtin").grep_string({
-                        search = vim.fn.expand("<cword>")
-                    })
+                    require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
                 end,
                 desc = "Search word under cursor",
                 mode = { "n", "v" },
             },
-
             {
                 "<leader>fl",
-                function()
-                    require("telescope.builtin").live_grep()
-                end,
+                function() require("telescope.builtin").live_grep() end,
                 desc = "Live grep",
-                mode = "n",
             },
-
             {
                 "<leader>fo",
-                function()
-                    require("telescope.builtin").oldfiles()
-                end,
-                desc = "Old files",
-                mode = "n",
+                function() require("telescope.builtin").oldfiles() end,
+                desc = "Recent files",
             },
-
             {
                 "<leader>fc",
-                function()
-                    require("telescope.builtin").commands()
-                end,
+                function() require("telescope.builtin").commands() end,
                 desc = "Command palette",
                 mode = { "n", "v" },
             },
-
             {
                 "<leader>ft",
-                function()
-                    require("telescope").extensions["todo-comments"].todo()
-                end,
-                desc = "Search TODO-Comment",
-                mode = "n",
+                function() require("telescope").extensions["todo-comments"].todo() end,
+                desc = "Search TODO comments",
             },
-
-            {
-                "<leader>li",
-                function()
-                    require("telescope.builtin").lsp_implementations()
-                end,
-                desc = "LSP Implementations",
-                mode = "n",
-            },
-
-            {
-                "<leader>ls",
-                function()
-                    require("telescope.builtin").lsp_document_symbols()
-                end,
-                desc = "Document Symbols",
-                mode = "n",
-            },
-
-            {
-                "<leader>lw",
-                function()
-                    require("telescope.builtin").lsp_workspace_symbols()
-                end,
-                desc = "Workspace Symbols",
-                mode = "n",
-            },
-
             {
                 "<leader>fb",
                 function()
                     require("telescope.builtin").buffers({
                         sort_lastused = true,
-                        ignore_current_buffer = false,
                         show_all_buffers = true,
-                        previewer = true,
-                        initial_mode = "insert",
-                        mappings = {
-                            i = {
-                                ["<C-d>"] = require("telescope.actions").delete_buffer,
-                            },
-                            n = {
-                                ["dd"] = require("telescope.actions").delete_buffer,
-                            },
-                        },
                     })
                 end,
                 desc = "Buffers",
-                mode = "n",
             },
-
             {
                 "<leader>fh",
-                function()
-                    require("telescope.builtin").help_tags()
-                end,
-                desc = "Help Tags",
-                mode = "n",
+                function() require("telescope.builtin").help_tags() end,
+                desc = "Help tags",
             },
-
             {
                 "<leader>fk",
-                function()
-                    require("telescope.builtin").keymaps()
-                end,
+                function() require("telescope.builtin").keymaps() end,
                 desc = "Keymaps",
-                mode = "n",
+            },
+            {
+                "<leader>fr",
+                function() require("telescope.builtin").registers() end,
+                desc = "Registers",
             },
 
             {
-                "<leader>fr",
-                function()
-                    require("telescope.builtin").registers()
-                end,
-                desc = "Registers",
-                mode = "n",
+                "<leader>ls",
+                function() require("telescope.builtin").lsp_document_symbols() end,
+                desc = "LSP document symbols",
+            },
+            {
+                "<leader>lw",
+                function() require("telescope.builtin").lsp_workspace_symbols() end,
+                desc = "LSP workspace symbols",
             },
 
             {
                 "<leader>pp",
                 function()
                     local root = vim.fs.root(0, {
-                        ".git",
-                        ".svn",
-                        "pyproject.toml",
-                        "Cargo.toml",
-                        "go.mod",
-                        "Makefile",
-                        "CMakeLists.txt",
-                        "meson.build",
-                        "README.md",
-                    }) or vim.loop.cwd()
+                        ".git", ".svn",
+                        "pyproject.toml", "Cargo.toml", "go.mod",
+                        "Makefile", "CMakeLists.txt", "meson.build",
+                    }) or vim.uv.cwd()
 
                     require("telescope.builtin").find_files({
                         cwd = root,
@@ -309,100 +235,87 @@ return {
                     })
                 end,
                 desc = "Project files",
-                mode = "n",
             },
-
             {
                 "<leader>pc",
                 function()
                     local root = vim.fs.root(0, {
                         ".git",
-                        "pyproject.toml",
-                        "Cargo.toml",
-                        "go.mod",
-                        "Makefile",
-                        "CMakeLists.txt",
-                    }) or vim.loop.cwd()
+                        "pyproject.toml", "Cargo.toml", "go.mod",
+                        "Makefile", "CMakeLists.txt",
+                    }) or vim.uv.cwd()
 
                     vim.cmd.lcd(root)
-                    print("Project root: " .. root)
+                    vim.notify("Project root: " .. root, vim.log.levels.INFO)
                 end,
-                desc = "Set project root",
-                mode = "n",
+                desc = "Set project root (lcd)",
             },
         },
 
         config = function()
+            local actions = require("telescope.actions")
+            local fb_actions = require("telescope._extensions.file_browser.actions")
+
             require("telescope").setup({
                 defaults = {
-                    layout_strategy = "horizontal",
+                    layout_strategy  = "horizontal",
                     sorting_strategy = "ascending",
-
                     layout_config = {
-                        width = 0.8,
-                        height = 0.8,
-                        preview_cutoff = 120,
-                        prompt_position = "top",
+                        width           = 0.8,
+                        height          = 0.8,
+                        preview_cutoff  = 120,
+                        prompt_position = "bottom",
                     },
-
                     preview = {
                         treesitter = true,
                     },
-
                     file_ignore_patterns = {
-                        "node_modules",
-                        "dist",
-                        "build",
-                        "target",
-                        "%.git/",
+                        "node_modules", "dist", "build", "target", "%.git/",
                     },
-
                     border = true,
+                    mappings = {
+                        i = { ["<C-d>"] = actions.delete_buffer },
+                        n = { ["dd"]    = actions.delete_buffer },
+                    },
                 },
+
                 pickers = {
-                    find_files = {
-                        hidden = true,
-                        previewer = true,
-                    },
-                    live_grep = {
-                        previewer = true,
-                    },
-                    buffers = {
-                        previewer = true,
-                    },
+                    find_files = { hidden = true },
                 },
+
                 extensions = {
                     fzf = {
-                        fuzzy = true,
+                        fuzzy                   = true,
                         override_generic_sorter = true,
-                        override_file_sorter = true,
-                        case_mode = "smart_case",
+                        override_file_sorter    = true,
+                        case_mode               = "smart_case",
                     },
                     file_browser = {
-                        theme = "dropdown",
-                        hijack_netrw = true,
-                        hidden = true,
-                        no_ignore = true,
+                        theme          = "dropdown",
+                        hijack_netrw   = true,
+                        hidden         = true,
+                        no_ignore      = true,
                         layout_strategy = "horizontal",
-                            layout_config = {
-                                horizontal = {
-                                    width = 0.8,
-                                    height = 0.8,
-                                    preview_width = 0.5,
-                                },
+                        layout_config  = {
+                            horizontal = {
+                                width         = 0.8,
+                                height        = 0.8,
+                                preview_width = 0.5,
+                            },
                         },
                         mappings = {
-                            ["i"] = {
-                                ["<A-a>"] = require("telescope._extensions.file_browser.actions").create,
-                                ["<A-d>"] = require("telescope._extensions.file_browser.actions").remove,
-                                ["<A-r>"] = require("telescope._extensions.file_browser.actions").rename,
-                                ["<A-m>"] = require("telescope._extensions.file_browser.actions").move,
-                                ["<A-c>"] = require("telescope._extensions.file_browser.actions").copy,
+                            i = {
+                                ["<A-a>"] = fb_actions.create,
+                                ["<A-d>"] = fb_actions.remove,
+                                ["<A-r>"] = fb_actions.rename,
+                                ["<A-m>"] = fb_actions.move,
+                                ["<A-c>"] = fb_actions.copy,
                             },
                         },
                     },
                 },
             })
+
             require("telescope").load_extension("fzf")
             require("telescope").load_extension("file_browser")
         end,
@@ -410,25 +323,52 @@ return {
 
     {
         "stevearc/aerial.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         event = { "BufReadPost", "BufNewFile" },
-
         config = function()
             require("aerial").setup({
                 backends = { "lsp", "treesitter" },
                 layout = {
-                    min_width = 24,
+                    min_width         = 24,
                     default_direction = "right",
                 },
                 update_events = "TextChanged,InsertLeave",
-                show_guides = true,
+                show_guides   = true,
                 icons = {
-                    Function = "ƒ",
-                    Class = "𝓒",
-                    Variable = "",
+                    Function    = "ƒ",
+                    Method      = "𝓜",
+                    Constructor = "",
+                    Class       = "𝓒",
+                    Interface   = "",
+                    Struct      = "𝓢",
+                    Enum        = "",
+                    EnumMember  = "",
+
+                    Variable    = "",
+                    Field       = "",
+                    Property    = "",
+                    Constant    = "",
+
+                    Module      = "",
+                    Package     = "",
+                    Namespace   = "",
+
+                    TypeParameter = "",
+                    Event       = "",
+                    Operator    = "",
+
+                    Array       = "",
+                    Boolean     = "",
+                    Null        = "∅",
+                    Number      = "#",
+                    Object      = "",
+                    String      = "",
+                    Key         = "",
                 },
             })
 
-            vim.keymap.set("n", "<leader>ae", "<cmd>AerialToggle!<CR>", { noremap = true, silent = true, desc = "Toggle Aerial outline" })
+            vim.keymap.set("n", "<leader>ae", "<cmd>AerialToggle!<CR>",
+                { noremap = true, silent = true, desc = "Toggle Aerial outline" })
         end,
     },
 }

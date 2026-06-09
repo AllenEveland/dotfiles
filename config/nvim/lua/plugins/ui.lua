@@ -4,29 +4,28 @@ return {
         priority = 1000,
         config = function()
             require("onedark").setup({
-                style = "warmer",
-                transparent = true,
-                term_colors = true,
-                ending_tildes = false,
+                style          = "warmer",
+                transparent    = true,
+                term_colors    = true,
+                ending_tildes  = false,
                 code_style = {
-                    comments = "italic",
-                    keywords = "none",
+                    comments  = "italic",
+                    keywords  = "none",
                     functions = "none",
-                    strings = "none",
+                    strings   = "none",
                     variables = "none",
                 },
-                toggle_style_key = "<leader>ts",
+                toggle_style_key  = "<leader>ts",
                 toggle_style_list = { "dark", "warm", "warmer", "cool", "deep", "darker" },
                 diagnostics = {
-                    darker = true,
-                    undercurl = true,
+                    darker     = true,
+                    undercurl  = true,
                     background = true,
                 },
             })
-        require("onedark").load()
+            require("onedark").load()
         end,
     },
-
     {
         "nvim-lualine/lualine.nvim",
         lazy = false,
@@ -95,13 +94,11 @@ return {
         lazy = false,
         config = function()
             local notify = require("notify")
-
             notify.setup({
-                timeout = 5000,
-                stages = "fade_in_slide_out",
+                timeout          = 5000,
+                stages           = "fade_in_slide_out",
                 background_colour = "#000000",
             })
-
             vim.notify = notify
         end,
     },

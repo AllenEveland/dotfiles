@@ -1,4 +1,5 @@
 # hyprconfig
+
 My Simple Hyprland Config  
 
 This setup is intentionally minimal and focused on work.
@@ -7,7 +8,8 @@ Most utilities are implemented separately using custom scripts (Bash/Python) and
 
 Please read the documentation carefully before using it, as the workflow and keybindings may take some time to get used to.
 
-# Information
+## Information
+
 OS: ```Arch Linux```
 
 PKG: ```pacman```
